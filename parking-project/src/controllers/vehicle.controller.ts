@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
-import { VehicleService } from './vehicle.service';
-import { Vehicle } from './vehicle.entity';
+import { VehicleService } from '../services/vehicle.service';
+import { Vehicle } from '../entities/vehicle.entity';
 
 @Controller('vehicle')
 export class VehicleController {

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from '../dbconnection/database.module';
-import { vehicleProviders } from './vehicle.providers';
-import { VehicleService } from './vehicle.service';
-import { VehicleController } from './vehicle.controller';
+import { vehicleProviders } from '../providers/vehicle.providers';
+import { VehicleService } from '../services/vehicle.service';
+import { VehicleController } from '../controllers/vehicle.controller';
 
 @Module({
   imports: [DatabaseModule],
