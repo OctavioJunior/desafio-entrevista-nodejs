@@ -8,13 +8,13 @@ export class Company {
   @Column({ length: 255 })
   companyName: string;
 
-  @Column({ length: 14 })
+  @Column({ length: 20 })
   cnpj: string;
 
   @Column({ length: 255 })
   companyAddress: string;
 
-  @Column('int')
+  @Column('bigint')
   companyPhone: number;
 
   @Column('int')
