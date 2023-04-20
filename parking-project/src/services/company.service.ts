@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Company } from '../entities/company.entity';
 import { CompanyRegisterDTO } from 'src/dto/company.register.dto';
+import { CompanyUpdateDTO } from 'src/dto/company.update.dto';
 
 @Injectable()
 export class CompanyService {
@@ -36,6 +37,22 @@ export class CompanyService {
         mensagem: 'Erro ao cadastrar empresa!'
       }
     })
+  }
 
+  async updateCompany(id: number, data: CompanyUpdateDTO): Promise<any>{
+    
+    return this.companyRepository.update({id}, {...data})
+    .then((result)=>{
+      return <any>{
+        status: true,
+        mensagem: 'Empresa atualizada!'
+      }
+    })
+    .catch((error)=>{
+      return <any>{
+        status: false,
+        mensagem: 'Erro ao atualizar empresa!'
+      }
+    })
   }
 }

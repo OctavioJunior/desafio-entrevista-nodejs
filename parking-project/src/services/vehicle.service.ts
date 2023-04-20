@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Vehicle } from '../entities/vehicle.entity';
 import { VehicleRegisterDTO } from 'src/dto/vehicle.register.dto';
+import { VehicleUpdateDTO } from 'src/dto/vehicle.update.dto';
 
 @Injectable()
 export class VehicleService {
@@ -15,14 +16,12 @@ export class VehicleService {
   }
 
   async registerVehicle(data: VehicleRegisterDTO): Promise<any>{
-    let vehicle = new Vehicle()
+    
+    const newVehicle = this.vehicleRepository.create({
+      ...data,
+    })
 
-    vehicle.vehicleBrand = data.vehicleBrand
-    vehicle.vehicleColor = data.vehicleColor
-    vehicle.vehicleModel = data.vehicleModel
-    vehicle.vehiclePlate = data.vehiclePlate
-    vehicle.vehicleType = data.vehicleType
-    return this.vehicleRepository.save(vehicle)
+    return this.vehicleRepository.save(newVehicle)
     .then((result)=>{
       return <any>{
         status: true,
@@ -35,6 +34,23 @@ export class VehicleService {
         mensagem: 'Erro ao cadastrar veiculo!'
       }
     })
-
   }
+
+  async updateVehicle(id: number, data: VehicleUpdateDTO): Promise<any>{
+    
+    return this.vehicleRepository.update({id}, {...data})
+    .then((result)=>{
+      return <any>{
+        status: true,
+        mensagem: 'Veiculo atualizado!'
+      }
+    })
+    .catch((error)=>{
+      return <any>{
+        status: false,
+        mensagem: 'Erro ao atualiza veiculo!'
+      }
+    })
+  }
+
 }
