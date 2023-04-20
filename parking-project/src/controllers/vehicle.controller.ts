@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { VehicleService } from '../services/vehicle.service';
 import { Vehicle } from '../entities/vehicle.entity';
 import { VehicleRegisterDTO } from 'src/dto/vehicle.register.dto';
@@ -8,9 +8,14 @@ import { VehicleUpdateDTO } from 'src/dto/vehicle.update.dto';
 export class VehicleController {
   constructor(private readonly vehicleService: VehicleService) {}
 
-    @Get('findAll')
+    @Get()
     async findAllVehicles(): Promise<Vehicle[]>{
         return this.vehicleService.findAllVehicles()
+    }
+
+    @Get(':id')
+    async findOneVehicle(@Param('id') id: number):Promise<any>{
+      return this.vehicleService.findOneVehicle(id)
     }
 
     @Post()
@@ -23,4 +28,8 @@ export class VehicleController {
       return this.vehicleService.updateVehicle(id, data)
     }
 
+    @Delete(':id')
+    async deleteOneVehicle(@Param('id') id: number): Promise<any>{
+      return this.vehicleService.deleteOneVehicle(id)
+    }        
 }

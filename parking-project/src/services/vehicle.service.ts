@@ -15,6 +15,10 @@ export class VehicleService {
     return this.vehicleRepository.find();
   }
 
+  async findOneVehicle(id: number): Promise<any>{
+    return this.vehicleRepository.findOneBy({id})
+  }
+
   async registerVehicle(data: VehicleRegisterDTO): Promise<any>{
     
     const newVehicle = this.vehicleRepository.create({
@@ -49,6 +53,22 @@ export class VehicleService {
       return <any>{
         status: false,
         mensagem: 'Erro ao atualiza veiculo!'
+      }
+    })
+  }
+
+  async deleteOneVehicle (id: number): Promise<any>{
+    return this.vehicleRepository.delete({id})
+    .then((result)=>{
+      return<any>{
+        status: true,
+        mensagem: 'Veiculo removido!'
+      }
+    })
+    .catch((error)=>{
+      return<any>{
+        status: false,
+        mensagem: 'Não foi possivel remover o veiculo!'
       }
     })
   }

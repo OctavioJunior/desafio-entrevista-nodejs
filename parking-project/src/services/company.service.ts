@@ -15,6 +15,10 @@ export class CompanyService {
     return this.companyRepository.find();
   }
 
+  async findOneCompany(id: number): Promise<any>{
+    return this.companyRepository.findOneBy({id})
+  }
+
   async registerCompany(data: CompanyRegisterDTO): Promise<any>{
     let company = new Company()
 
@@ -52,6 +56,23 @@ export class CompanyService {
       return <any>{
         status: false,
         mensagem: 'Erro ao atualizar empresa!'
+      }
+    })
+  }
+
+  async deleteOneCompany(id: number): Promise<any>{
+    
+    return this.companyRepository.delete({id})
+    .then((result)=>{
+      return <any>{
+        status: true,
+        mensagem: 'Empresa removida!'
+      }
+    })
+    .catch((error)=>{
+      return <any>{
+        status: false,
+        mensagem: 'Não foi possivel remover a empresa!'
       }
     })
   }
