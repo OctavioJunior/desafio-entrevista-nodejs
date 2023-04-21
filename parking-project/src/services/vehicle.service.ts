@@ -1,8 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Vehicle } from '../entities/vehicle.entity';
-import { VehicleRegisterDTO } from 'src/dto/vehicle.register.dto';
-import { VehicleUpdateDTO } from 'src/dto/vehicle.update.dto';
+import { VehicleRegisterDTO, VehicleUpdateDTO } from 'src/dtos/vehicle.dto';
 
 @Injectable()
 export class VehicleService {
@@ -16,61 +15,23 @@ export class VehicleService {
   }
 
   async findOneVehicle(id: number): Promise<any>{
-    return this.vehicleRepository.findOneBy({id})
+    return this.vehicleRepository.findOne({where: {id}})
   }
 
-  async registerVehicle(data: VehicleRegisterDTO): Promise<any>{
-    
-    const newVehicle = this.vehicleRepository.create({
-      ...data,
-    })
-
-    return this.vehicleRepository.save(newVehicle)
-    .then((result)=>{
-      return <any>{
-        status: true,
-        mensagem: 'Veiculo cadastrado!'
-      }
-    })
-    .catch((error)=>{
-      return <any>{
-        status: false,
-        mensagem: 'Erro ao cadastrar veiculo!'
-      }
-    })
+  async registerVehicle(data: VehicleRegisterDTO): Promise<any>{    
+    const newVehicle = this.vehicleRepository.create(data)
+    await this.vehicleRepository.save(newVehicle)
+    return { status: true, mensagem: 'Veiculo cadastrado!' }
   }
 
   async updateVehicle(id: number, data: VehicleUpdateDTO): Promise<any>{
-    
-    return this.vehicleRepository.update({id}, {...data})
-    .then((result)=>{
-      return <any>{
-        status: true,
-        mensagem: 'Veiculo atualizado!'
-      }
-    })
-    .catch((error)=>{
-      return <any>{
-        status: false,
-        mensagem: 'Erro ao atualiza veiculo!'
-      }
-    })
+    await this.vehicleRepository.update({id}, {...data})
+    return { status: true, mensagem: 'Veiculo atualizado!' }
   }
 
   async deleteOneVehicle (id: number): Promise<any>{
-    return this.vehicleRepository.delete({id})
-    .then((result)=>{
-      return<any>{
-        status: true,
-        mensagem: 'Veiculo removido!'
-      }
-    })
-    .catch((error)=>{
-      return<any>{
-        status: false,
-        mensagem: 'Não foi possivel remover o veiculo!'
-      }
-    })
+    await this.vehicleRepository.delete({id})
+    return { status: true, mensagem: 'Veiculo removido!' }
   }
 
 }

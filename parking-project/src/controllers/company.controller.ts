@@ -1,12 +1,15 @@
 import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { CompanyService } from '../services/company.service';
 import { Company } from '../entities/company.entity';
-import { CompanyRegisterDTO } from 'src/dto/company.register.dto';
-import { CompanyUpdateDTO } from 'src/dto/company.update.dto';
+import { CompanyRegisterDTO, CompanyUpdateDTO } from 'src/dtos/company.dto';
+import { VehicleService } from 'src/services/vehicle.service';
 
 @Controller('company')
 export class CompanyController {
-  constructor(private readonly companyService: CompanyService) {}
+  constructor(
+    private readonly companyService: CompanyService,
+    private readonly vehicleService: VehicleService,
+    ) {}
 
     @Get()
     async findAllCompanies(): Promise<Company[]>{

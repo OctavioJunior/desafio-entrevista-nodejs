@@ -1,79 +1,38 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Company } from '../entities/company.entity';
-import { CompanyRegisterDTO } from 'src/dto/company.register.dto';
-import { CompanyUpdateDTO } from 'src/dto/company.update.dto';
+import { CompanyRegisterDTO, CompanyUpdateDTO } from 'src/dtos/company.dto';
+import { VehicleService } from './vehicle.service';
 
 @Injectable()
 export class CompanyService {
   constructor(
     @Inject('COMPANY_REPOSITORY')
     private companyRepository: Repository<Company>,
+    private vehicleService: VehicleService,
   ) {}
 
   async findAllCompanies(): Promise<Company[]> {
-    return this.companyRepository.find();
+    return this.companyRepository.find()
   }
 
   async findOneCompany(id: number): Promise<any>{
-    return this.companyRepository.findOneBy({id})
+    return this.companyRepository.findOne({where: {id}})
   }
 
-  async registerCompany(data: CompanyRegisterDTO): Promise<any>{
-    let company = new Company()
-
-    company.companyName = data.companyName
-    company.cnpj = data.cnpj
-    company.companyAddress = data.companyAddress
-    company.companyPhone = data.companyPhone
-    company.numberOfCarParking = data.numberOfCarParking
-    company.numberOfMotorcycleParking = data.numberOfMotorcycleParking
-    return this.companyRepository.save(company)
-    .then((result)=>{
-      return <any>{
-        status: true,
-        mensagem: 'Empresa cadastrada!'
-      }
-    })
-    .catch((error)=>{
-      return <any>{
-        status: false,
-        mensagem: 'Erro ao cadastrar empresa!'
-      }
-    })
+  async registerCompany(data: CompanyRegisterDTO): Promise<any> {
+    const newCompany = this.companyRepository.create(data)
+    await this.companyRepository.save(newCompany)
+    return { status: true, mensagem: 'Empresa cadastrada!' }
   }
 
   async updateCompany(id: number, data: CompanyUpdateDTO): Promise<any>{
-    
-    return this.companyRepository.update({id}, {...data})
-    .then((result)=>{
-      return <any>{
-        status: true,
-        mensagem: 'Empresa atualizada!'
-      }
-    })
-    .catch((error)=>{
-      return <any>{
-        status: false,
-        mensagem: 'Erro ao atualizar empresa!'
-      }
-    })
+    await this.companyRepository.update({id}, {...data})
+    return { status: true, mensagem: 'Empresa atualizada!' }
   }
 
   async deleteOneCompany(id: number): Promise<any>{
-    
-    return this.companyRepository.delete({id})
-    .then((result)=>{
-      return <any>{
-        status: true,
-        mensagem: 'Empresa removida!'
-      }
-    })
-    .catch((error)=>{
-      return <any>{
-        status: false,
-        mensagem: 'Não foi possivel remover a empresa!'
-      }
-    })
+    await this.companyRepository.delete({id})
+    return { status: true, mensagem: 'Empresa removida!' }
   }
 }
