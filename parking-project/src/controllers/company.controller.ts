@@ -38,4 +38,9 @@ export class CompanyController {
       async vehicleIn(@Param('name') name: string, @Param('plate') plate: string): Promise<any>{
       return this.companyService.vehicleIn(name, plate)
     }
+
+    @Put('vehicleOut/:name/:plate')
+      async vehicleOut(@Param('name') name: string, @Param('plate') plate: string): Promise<any>{
+      return this.companyService.vehicleOut(name, plate)
+    }
 }

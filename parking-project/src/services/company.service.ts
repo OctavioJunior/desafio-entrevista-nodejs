@@ -42,23 +42,42 @@ export class CompanyService {
   async vehicleIn(vehiclePlate: string, companyName: string): Promise<any>{
     const findedCompany = await this.companyRepository.findOne({where: {companyName}})
     const findedVehicle = await this.vehicleRepository.findOne({where: {vehiclePlate}})
-    console.log(findedCompany)
     console.log(findedVehicle)
+    console.log(findedCompany)
   
     if(!findedVehicle){
       return 'Veículo não cadastrado, realize o cadastro!'
     }
   
-    /*if(findedVehicle.vehicleType == 'Carro'){
+    if(findedVehicle.vehicleType == "Carro"){
       findedCompany.numberOfCarParking--
-      await this.companyRepository.update(findedCompany.companyName, {numberOfCarParking: findedCompany.numberOfCarParking})
-      return findedCompany.numberOfCarParking
+      this.companyRepository.save(findedCompany)
+      return `Veículo cadastrado, restam ${findedCompany.numberOfCarParking} vagas para carro!`
     } else {
       findedCompany.numberOfMotorcycleParking--
-      await this.companyRepository.update(findedCompany.companyName, {numberOfMotorcycleParking: findedCompany.numberOfMotorcycleParking})
-      return findedCompany.numberOfMotorcycleParking
-    }*/
+      this.companyRepository.save(findedCompany)
+      return `Veículo cadastrado, restam ${findedCompany.numberOfMotorcycleParking} vagas para moto!`
+    }
   }
-  
 
+  async vehicleOut(vehiclePlate: string, companyName: string): Promise<any>{
+    const findedCompany = await this.companyRepository.findOne({where: {companyName}})
+    const findedVehicle = await this.vehicleRepository.findOne({where: {vehiclePlate}})
+    console.log(findedVehicle)
+    console.log(findedCompany)
+  
+    if(!findedVehicle){
+      return 'Veículo não encontrado!'
+    }
+  
+    if(findedVehicle.vehicleType == "Carro"){
+      findedCompany.numberOfCarParking++
+      this.companyRepository.save(findedCompany)
+      return `Vagas atualizadas: ${findedCompany.numberOfCarParking} vagas para carro!`
+    } else {
+      findedCompany.numberOfMotorcycleParking++
+      this.companyRepository.save(findedCompany)
+      return `Vagas atualizadas:  ${findedCompany.numberOfMotorcycleParking} vagas para moto!`
+    }
+  }
 }
