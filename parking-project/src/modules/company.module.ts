@@ -10,10 +10,12 @@ import { VehicleService } from 'src/services/vehicle.service';
 
 @Module({
   imports: [DatabaseModule, VehicleModule],
-  controllers: [CompanyController,VehicleController],
+  controllers: [CompanyController, VehicleController],
   providers: [
-    ...companyProviders, ...vehicleProviders,
-    CompanyService, VehicleService,
+    ...companyProviders,
+    ...vehicleProviders,
+    CompanyService,
+    VehicleService,
   ],
 })
 export class CompanyModule {}

@@ -11,9 +11,7 @@ export const databaseProviders = [
         username: 'root',
         password: 'password',
         database: 'parking_api',
-        entities: [
-            __dirname + '/../**/*.entity{.ts,.js}',
-        ],
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
       });
 

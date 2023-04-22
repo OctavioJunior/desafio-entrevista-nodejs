@@ -1,4 +1,4 @@
-export interface VehicleRegisterDTO{
+export interface VehicleRegisterDTO {
   vehicleBrand: string;
   vehicleModel: string;
   vehicleColor: string;
@@ -6,7 +6,7 @@ export interface VehicleRegisterDTO{
   vehiclePlate: string;
 }
 
-export interface VehicleUpdateDTO{
+export interface VehicleUpdateDTO {
   vehicleBrand?: string;
   vehicleModel?: string;
   vehicleColor?: string;

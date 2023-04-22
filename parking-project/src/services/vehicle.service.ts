@@ -14,25 +14,26 @@ export class VehicleService {
     return this.vehicleRepository.find();
   }
 
-  async findOneVehicle(vehiclePlate: string): Promise<any>{
-    const vehicleFinded = await this.vehicleRepository.findOne({where: {vehiclePlate}})
-    return vehicleFinded
+  async findOneVehicle(vehiclePlate: string): Promise<any> {
+    const vehicleFinded = await this.vehicleRepository.findOne({
+      where: { vehiclePlate },
+    });
+    return vehicleFinded;
   }
 
-  async registerVehicle(data: VehicleRegisterDTO): Promise<any>{    
-    const newVehicle = this.vehicleRepository.create(data)
-    await this.vehicleRepository.save(newVehicle)
-    return { status: true, mensagem: 'Veiculo cadastrado!' }
+  async registerVehicle(data: VehicleRegisterDTO): Promise<any> {
+    const newVehicle = this.vehicleRepository.create(data);
+    await this.vehicleRepository.save(newVehicle);
+    return { status: true, mensagem: 'Veiculo cadastrado!' };
   }
 
-  async updateVehicle(id: number, data: VehicleUpdateDTO): Promise<any>{
-    await this.vehicleRepository.update({id}, {...data})
-    return { status: true, mensagem: 'Veiculo atualizado!' }
+  async updateVehicle(id: number, data: VehicleUpdateDTO): Promise<any> {
+    await this.vehicleRepository.update({ id }, { ...data });
+    return { status: true, mensagem: 'Veiculo atualizado!' };
   }
 
-  async deleteOneVehicle (id: number): Promise<any>{
-    await this.vehicleRepository.delete({id})
-    return { status: true, mensagem: 'Veiculo removido!' }
+  async deleteOneVehicle(id: number): Promise<any> {
+    await this.vehicleRepository.delete({ id });
+    return { status: true, mensagem: 'Veiculo removido!' };
   }
-
 }

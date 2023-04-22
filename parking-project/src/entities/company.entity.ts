@@ -19,7 +19,7 @@ export class Company {
 
   @Column('int')
   numberOfCarParking: number;
-  
+
   @Column('int')
   numberOfMotorcycleParking: number;
 }
