@@ -14,8 +14,9 @@ export class VehicleService {
     return this.vehicleRepository.find();
   }
 
-  async findOneVehicle(id: number): Promise<any>{
-    return this.vehicleRepository.findOne({where: {id}})
+  async findOneVehicle(vehiclePlate: string): Promise<any>{
+    const vehicleFinded = await this.vehicleRepository.findOne({where: {vehiclePlate}})
+    return vehicleFinded
   }
 
   async registerVehicle(data: VehicleRegisterDTO): Promise<any>{    

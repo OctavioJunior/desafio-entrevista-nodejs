@@ -1,23 +1,26 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Company } from '../entities/company.entity';
-import { CompanyRegisterDTO, CompanyUpdateDTO } from 'src/dtos/company.dto';
+import { CompanyRegisterDTO, CompanyUpdateDTO, CompanyParkingDTO } from 'src/dtos/company.dto';
 import { VehicleService } from './vehicle.service';
+import { Vehicle } from 'src/entities/vehicle.entity';
 
 @Injectable()
 export class CompanyService {
   constructor(
     @Inject('COMPANY_REPOSITORY')
     private companyRepository: Repository<Company>,
-    private vehicleService: VehicleService,
+    @Inject('VEHICLE_REPOSITORY')
+    private vehicleRepository: Repository<Vehicle>,
+    private vehicleService: VehicleService
   ) {}
 
   async findAllCompanies(): Promise<Company[]> {
     return this.companyRepository.find()
   }
 
-  async findOneCompany(id: number): Promise<any>{
-    return this.companyRepository.findOne({where: {id}})
+  async findOneCompany(companyName: string): Promise<any>{
+    return this.companyRepository.findOne({where: {companyName}})
   }
 
   async registerCompany(data: CompanyRegisterDTO): Promise<any> {
@@ -35,4 +38,27 @@ export class CompanyService {
     await this.companyRepository.delete({id})
     return { status: true, mensagem: 'Empresa removida!' }
   }
+
+  async vehicleIn(vehiclePlate: string, companyName: string): Promise<any>{
+    const findedCompany = await this.companyRepository.findOne({where: {companyName}})
+    const findedVehicle = await this.vehicleRepository.findOne({where: {vehiclePlate}})
+    console.log(findedCompany)
+    console.log(findedVehicle)
+  
+    if(!findedVehicle){
+      return 'Veículo não cadastrado, realize o cadastro!'
+    }
+  
+    /*if(findedVehicle.vehicleType == 'Carro'){
+      findedCompany.numberOfCarParking--
+      await this.companyRepository.update(findedCompany.companyName, {numberOfCarParking: findedCompany.numberOfCarParking})
+      return findedCompany.numberOfCarParking
+    } else {
+      findedCompany.numberOfMotorcycleParking--
+      await this.companyRepository.update(findedCompany.companyName, {numberOfMotorcycleParking: findedCompany.numberOfMotorcycleParking})
+      return findedCompany.numberOfMotorcycleParking
+    }*/
+  }
+  
+
 }

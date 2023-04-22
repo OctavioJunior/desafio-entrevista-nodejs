@@ -15,3 +15,9 @@ export interface CompanyRegisterDTO{
     numberOfCarParking?: number;
     numberOfMotorcycleParking?: number;
   }
+
+  export interface CompanyParkingDTO{
+    companyName: string,
+    numberOfCarParking?: number;
+    numberOfMotorcycleParking?: number;
+  }

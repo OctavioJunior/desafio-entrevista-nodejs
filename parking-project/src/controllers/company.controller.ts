@@ -1,14 +1,12 @@
 import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { CompanyService } from '../services/company.service';
 import { Company } from '../entities/company.entity';
-import { CompanyRegisterDTO, CompanyUpdateDTO } from 'src/dtos/company.dto';
-import { VehicleService } from 'src/services/vehicle.service';
+import { CompanyRegisterDTO, CompanyUpdateDTO, CompanyParkingDTO } from 'src/dtos/company.dto';
 
 @Controller('company')
 export class CompanyController {
   constructor(
     private readonly companyService: CompanyService,
-    private readonly vehicleService: VehicleService,
     ) {}
 
     @Get()
@@ -16,9 +14,9 @@ export class CompanyController {
         return this.companyService.findAllCompanies()
     }
 
-    @Get(':id')
-    async findOneCompany(@Param('id') id: number): Promise<any>{
-      return this.companyService.findOneCompany(id)
+    @Get(':name')
+    async findOneCompany(@Param('name') companyName: string): Promise<any>{
+      return this.companyService.findOneCompany(companyName)
     }
 
     @Post()
@@ -34,5 +32,10 @@ export class CompanyController {
     @Delete(':id')
     async deleteOneCompany(@Param('id') id: number): Promise<any>{
       return this.companyService.deleteOneCompany(id)
+    }
+
+    @Put('vehicleIn/:name/:plate')
+      async vehicleIn(@Param('name') name: string, @Param('plate') plate: string): Promise<any>{
+      return this.companyService.vehicleIn(name, plate)
     }
 }

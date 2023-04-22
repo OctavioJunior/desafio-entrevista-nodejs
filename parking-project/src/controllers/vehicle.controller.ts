@@ -12,9 +12,9 @@ export class VehicleController {
         return this.vehicleService.findAllVehicles()
     }
 
-    @Get(':id')
-    async findOneVehicle(@Param('id') id: number):Promise<any>{
-      return this.vehicleService.findOneVehicle(id)
+    @Get(':plate')
+    async findOneVehicle(@Param('plate') vehiclePlate: string):Promise<any>{
+      return this.vehicleService.findOneVehicle(vehiclePlate)
     }
 
     @Post()
