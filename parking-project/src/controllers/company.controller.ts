@@ -1,17 +1,19 @@
-/* eslint-disable prettier/prettier */
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Put,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Post,
+  Put,
 } from '@nestjs/common';
-import { CompanyService } from '../services/company.service';
-import { Company } from '../entities/company.entity';
 import CompanyRegisterDTO, { CompanyUpdateDTO } from 'src/dtos/company.dto';
+import { UserType } from 'src/enum/userType.enum';
+import { Roles } from '../decorators/roles.decoratos';
+import { Company } from '../entities/company.entity';
+import { CompanyService } from '../services/company.service';
 
+@Roles(UserType.User)
 @Controller('company')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}

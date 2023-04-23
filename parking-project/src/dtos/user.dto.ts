@@ -13,7 +13,7 @@ export class UserRegisterDTO {
   password: string;
 
   @IsNotEmpty()
-  type: number;
+  typeUser: number;
 }
 
 export class UserReturnDTO {

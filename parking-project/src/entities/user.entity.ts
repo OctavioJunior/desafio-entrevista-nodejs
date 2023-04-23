@@ -13,7 +13,7 @@ export class User {
   password: string;
 
   @Column()
-  type: number;
+  typeUser: number;
 
   @BeforeInsert()
   hashPassword() {

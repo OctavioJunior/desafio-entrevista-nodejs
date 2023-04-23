@@ -5,6 +5,6 @@ export class loginPayloadDTO {
 
   constructor(user: User) {
     this.id = user.id;
-    this.typeUser = user.type;
+    this.typeUser = user.typeUser;
   }
 }

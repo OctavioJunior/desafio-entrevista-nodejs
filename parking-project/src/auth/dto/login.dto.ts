@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class LoginDTO {
   @IsString()
@@ -6,4 +6,7 @@ export class LoginDTO {
 
   @IsString()
   password: string;
+
+  @IsNumber()
+  typeUser: number;
 }
