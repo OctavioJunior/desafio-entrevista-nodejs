@@ -12,6 +12,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  type: number;
+
   @BeforeInsert()
   hashPassword() {
     this.password = hashSync(this.password, 10);

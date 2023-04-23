@@ -11,6 +11,9 @@ export class UserRegisterDTO {
     message: MessageHelper.PASSWORD_VALID,
   })
   password: string;
+
+  @IsNotEmpty()
+  type: number;
 }
 
 export class UserReturnDTO {
