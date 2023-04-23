@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UserRegisterDTO, UserUpdateDTO } from 'src/dtos/user.dto';
+import { UserRegisterDTO } from 'src/dtos/user.dto';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 
@@ -14,8 +14,8 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async findOneUser(userName: string): Promise<any> {
-    return this.userRepository.findOne({ where: { userName } });
+  async findOneUser(email: string): Promise<any> {
+    return this.userRepository.findOne({ where: { email } });
   }
 
   async registerUser(data: UserRegisterDTO): Promise<any> {
@@ -24,13 +24,8 @@ export class UserService {
     return { status: true, mensagem: 'Usuário cadastrado!' };
   }
 
-  async updateUser(userName: string, data: UserUpdateDTO): Promise<any> {
-    await this.userRepository.update({ userName }, { ...data });
-    return { status: true, mensagem: 'Usuario atualizado!' };
-  }
-
-  async deleteOneUser(userName: string): Promise<any> {
-    await this.userRepository.delete({ userName });
+  async deleteOneUser(email: string): Promise<any> {
+    await this.userRepository.delete({ email });
     return { status: true, mensagem: 'Usuario removido!' };
   }
 }
