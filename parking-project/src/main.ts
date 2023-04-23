@@ -1,9 +1,4 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
-// eslint-disable-next-line linebreak-style, prettier/prettier
 import { NestFactory } from '@nestjs/core';
-// eslint-disable-next-line prettier/prettier
-
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -13,4 +8,3 @@ async function bootstrap() {
 }
 
 bootstrap();
-

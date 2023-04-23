@@ -10,10 +10,7 @@ import {
 } from '@nestjs/common';
 import { CompanyService } from '../services/company.service';
 import { Company } from '../entities/company.entity';
-import CompanyRegisterDTO, {
-  CompanyUpdateDTO,
-  CompanyParkingDTO,
-} from 'src/dtos/company.dto';
+import CompanyRegisterDTO, { CompanyUpdateDTO } from 'src/dtos/company.dto';
 
 @Controller('company')
 export class CompanyController {
