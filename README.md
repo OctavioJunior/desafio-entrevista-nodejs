@@ -46,7 +46,7 @@
         DB_PASSWORD= <password_db>
         DB_SCHEMA= <schema_db>
 
-<p>    Substitua `<host_db>` pela URL do host do MySQL, `<username_db>` pelo usuário do MySQL, `<password_db>` pela senha do MySQL e `<schema_db>` pelo nome do banco de dados do MySQL. Substitua `<token_jwt>` por uma string aleatória para ser usada como chave secreta na geração de tokens JWT.</p>
+<p>    Substitua `host_db` pela URL do host do MySQL, `username_db` pelo usuário do MySQL, `password_db` pela senha do MySQL e `schema_db` pelo nome do banco de dados do MySQL. Substitua `token_jwt` por uma string aleatória para ser usada como chave secreta na geração de tokens JWT.</p>
 
 <li>Inicie o servidor:</li>
 
@@ -96,10 +96,10 @@ Para autenticar um usuário, faça uma requisição POST para o endpoint `/auth`
   "numberOfMotorcycleParking": 30
 }</code></pre>
 
-A requisição deve incluir um cabeçalho `Authorization` com o valor `<token_jwt>`, substituindo `<token_jwt>` pelo token JWT obtido na autenticação.
+A requisição deve incluir um cabeçalho `Authorization` com o valor `token_jwt`, substituindo `token_jwt` pelo token JWT obtido na autenticação.
 
 Ex:
-Para listar os veiculos cadastrados, faça uma requisição GET para o endpoint `/vehicle`. A requisição deve incluir um cabeçalho `Authorization` com o valor `<token_jwt>`, substituindo `<token_jwt>` pelo token JWT obtido na autenticação.
+Para listar os veiculos cadastrados, faça uma requisição GET para o endpoint `/vehicle`. A requisição deve incluir um cabeçalho `Authorization` com o valor `token_jwt`, substituindo `token_jwt` pelo token JWT obtido na autenticação.
 
 <h2>Tecnologias utilizadas</h2>
 
