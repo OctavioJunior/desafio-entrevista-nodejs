@@ -32,7 +32,7 @@
 <h2>Instalação</h2>
 
 <p>Siga os passos abaixo para instalar e executar o projeto em seu ambiente local:</p>
-
+<p>
 <ol>
     <li>Clone este repositório em sua máquina:</li>
 
@@ -64,7 +64,7 @@ JWT_SECRET= segredo_para_jwt
 
     <pre><code>npm start</code></pre>
 
-</ol>
+    </ol></p>
 
 <h2>Utilização</h2>
 
