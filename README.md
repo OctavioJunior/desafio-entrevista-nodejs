@@ -32,11 +32,11 @@
 <h2>Instalação</h2>
 
 <p>Siga os passos abaixo para instalar e executar o projeto em seu ambiente local:</p>
-<p>
+
 <ol>
     <li>Clone este repositório em sua máquina:</li>
 
-    <pre><code>git clone https://github.com/OctavioJunior/desafio-entrevista-nestjs.git</code></pre>
+    <code>git clone https://github.com/OctavioJunior/desafio-entrevista-nestjs.git</code>
 
     <li>Entre na pasta do projeto:</li>
 
@@ -64,7 +64,7 @@ JWT_SECRET= segredo_para_jwt
 
     <pre><code>npm start</code></pre>
 
-    </ol></p>
+    </ol>
 
 <h2>Utilização</h2>
 
