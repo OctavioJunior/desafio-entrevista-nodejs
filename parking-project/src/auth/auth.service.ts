@@ -24,6 +24,7 @@ export class AuthService {
     const isMatch = await compare(login.password, user?.password || '');
 
     if (!user || !isMatch) {
+      console.log(login.password, user, isMatch);
       throw new NotFoundException(MessageHelper.EMAIL_OR_PASSWORD_WRONG);
     }
 

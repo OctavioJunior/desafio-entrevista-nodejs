@@ -20,6 +20,8 @@ export class UserService {
     if (!userFinded) {
       throw new NotFoundException(`Email: ${email} não encontrado!`);
     }
+    console.log(userFinded);
+    return userFinded;
   }
 
   async registerUser(data: UserRegisterDTO): Promise<any> {
