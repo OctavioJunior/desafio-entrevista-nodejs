@@ -41,13 +41,17 @@
 
         JWT_SECRET= <token_jwt>
 
+        DB_HOST= <host_db>
+        DB_USERNAME= <username_db>
+        DB_PASSWORD= <password_db>
+        DB_SCHEMA= <schema_db>
 
-
-<p>    Substitua `<host_do_banco_de_dados_mysql>` pela URL do host do MySQL, `<porta_do_banco_de_dados_mysql>` pela porta do MySQL, `<usuário_do_banco_de_dados_mysql>` pelo usuário do MySQL, `<senha_do_banco_de_dados_mysql>` pela senha do MySQL e `<nome_do_banco_de_dados_mysql>` pelo nome do banco de dados do MySQL. Substitua `<segredo_para_jwt>` por uma string aleatória para ser usada como chave secreta na geração de tokens JWT.</p>
+<p>    Substitua `host_db` pela URL do host do MySQL, `username_db` pelo usuário do MySQL, `password_db` pela senha do MySQL e `schema_db` pelo nome do banco de dados do MySQL. Substitua `token_jwt` por uma string aleatória para ser usada como chave secreta na geração de tokens JWT.</p>
 
 <li>Inicie o servidor:</li>
 
         npm run start:dev
+
 </ol>
 
 <h2>Utilização</h2>
@@ -92,10 +96,10 @@ Para autenticar um usuário, faça uma requisição POST para o endpoint `/auth`
   "numberOfMotorcycleParking": 30
 }</code></pre>
 
-A requisição deve incluir um cabeçalho `Authorization` com o valor `<token_jwt>`, substituindo `<token_jwt>` pelo token JWT obtido na autenticação.
+A requisição deve incluir um cabeçalho `Authorization` com o valor `token_jwt`, substituindo `token_jwt` pelo token JWT obtido na autenticação.
 
 Ex:
-Para listar os veiculos cadastrados, faça uma requisição GET para o endpoint `/vehicle`. A requisição deve incluir um cabeçalho `Authorization` com o valor `<token_jwt>`, substituindo `<token_jwt>` pelo token JWT obtido na autenticação.
+Para listar os veiculos cadastrados, faça uma requisição GET para o endpoint `/vehicle`. A requisição deve incluir um cabeçalho `Authorization` com o valor `token_jwt`, substituindo `token_jwt` pelo token JWT obtido na autenticação.
 
 <h2>Tecnologias utilizadas</h2>
 
