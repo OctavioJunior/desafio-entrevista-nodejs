@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Desafio Entrevista Nest.js</title>
-</head>
-<body>
-    <h1>Desafio Entrevista Nest.js</h1>
+<h1>Desafio Entrevista Nest.js</h1>
 <p>Este projeto é um desafio de entrevista em Nest.js, onde o candidato deverá implementar algumas funcionalidades em uma API RESTful. O objetivo do desafio é avaliar as habilidades do candidato em programação com Nest.js e a capacidade de resolver problemas.</p>
 
 <h2>Funcionalidades</h2>
@@ -123,5 +114,3 @@ Para listar os veiculos cadastrados, faça uma requisição GET para o endpoint 
     <li><a href="https://swagger.io/">Swagger</a> (ferramenta de documentação de APIs)</li>
     <li><a href="https://www.mysql.com/">MySQL</a> (banco de dados relacional)</li>
 </ul>
-</body>
-</html>
