@@ -46,8 +46,6 @@ export class CompanyService {
     const findedVehicle = await this.vehicleRepository.findOne({
       where: { vehiclePlate },
     });
-    console.log(findedVehicle);
-    console.log(findedCompany);
 
     if (!findedVehicle) {
       return 'Veículo não cadastrado, realize o cadastro!';
@@ -61,12 +59,15 @@ export class CompanyService {
       } else {
         return 'Sem vagas para carros disponivel';
       }
-    } else if (findedCompany.numberOfMotorcycleParking >= 0) {
-      findedCompany.numberOfCarParking--;
-      this.companyRepository.save(findedCompany);
-      return `Veículo cadastrado, restam ${findedCompany.numberOfCarParking} vagas para carro!`;
     } else {
-      return 'Sem vagas para motos disponivel';
+      if (findedCompany.numberOfMotorcycleParking >= 0) {
+        console.log(findedCompany);
+        findedCompany.numberOfMotorcycleParking--;
+        this.companyRepository.save(findedCompany);
+        return `Veículo cadastrado, restam ${findedCompany.numberOfMotorcycleParking} vagas para moto!`;
+      } else {
+        return 'Sem vagas para motos disponivel';
+      }
     }
   }
 
@@ -85,13 +86,22 @@ export class CompanyService {
     }
 
     if (findedVehicle.vehicleType == 'Carro') {
-      findedCompany.numberOfCarParking++;
-      this.companyRepository.save(findedCompany);
-      return `Vagas atualizadas: ${findedCompany.numberOfCarParking} vagas para carro!`;
+      if (findedCompany.numberOfCarParking <= 30) {
+        findedCompany.numberOfCarParking++;
+        this.companyRepository.save(findedCompany);
+        return `Veículo cadastrado, restam ${findedCompany.numberOfCarParking} vagas para carro!`;
+      } else {
+        return 'Todas vagas para carros disponiveis';
+      }
     } else {
-      findedCompany.numberOfMotorcycleParking++;
-      this.companyRepository.save(findedCompany);
-      return `Vagas atualizadas:  ${findedCompany.numberOfMotorcycleParking} vagas para moto!`;
+      if (findedCompany.numberOfMotorcycleParking <= 30) {
+        console.log(findedCompany);
+        findedCompany.numberOfMotorcycleParking++;
+        this.companyRepository.save(findedCompany);
+        return `Veículo cadastrado, restam ${findedCompany.numberOfMotorcycleParking} vagas para moto!`;
+      } else {
+        return 'Todas vagas para motos disponiveis';
+      }
     }
   }
 }
