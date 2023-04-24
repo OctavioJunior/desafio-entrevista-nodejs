@@ -54,13 +54,19 @@ export class CompanyService {
     }
 
     if (findedVehicle.vehicleType == 'Carro') {
+      if (findedCompany.numberOfCarParking >= 0) {
+        findedCompany.numberOfCarParking--;
+        this.companyRepository.save(findedCompany);
+        return `Veículo cadastrado, restam ${findedCompany.numberOfCarParking} vagas para carro!`;
+      } else {
+        return 'Sem vagas para carros disponivel';
+      }
+    } else if (findedCompany.numberOfMotorcycleParking >= 0) {
       findedCompany.numberOfCarParking--;
       this.companyRepository.save(findedCompany);
       return `Veículo cadastrado, restam ${findedCompany.numberOfCarParking} vagas para carro!`;
     } else {
-      findedCompany.numberOfMotorcycleParking--;
-      this.companyRepository.save(findedCompany);
-      return `Veículo cadastrado, restam ${findedCompany.numberOfMotorcycleParking} vagas para moto!`;
+      return 'Sem vagas para motos disponivel';
     }
   }
 
