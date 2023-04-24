@@ -26,7 +26,17 @@ export class CompanyService {
   async registerCompany(data: CompanyRegisterDTO): Promise<any> {
     const newCompany = this.companyRepository.create(data);
     await this.companyRepository.save(newCompany);
+    await this.parkingSlot(newCompany);
     return { status: true, mensagem: 'Empresa cadastrada!' };
+  }
+
+  async parkingSlot(data: Company): Promise<any> {
+    await this.findOneCompany(data.companyName);
+    const carSlot = data.numberOfCarParking;
+    data.availableCarSlot = carSlot;
+    const motorcycleSlot = data.numberOfMotorcycleParking;
+    data.availableMotorcycleSlot = carSlot;
+    return this.companyRepository.save(data);
   }
 
   async updateCompany(id: number, data: CompanyUpdateDTO): Promise<any> {
@@ -43,7 +53,7 @@ export class CompanyService {
     const findedCompany = await this.companyRepository.findOne({
       where: { companyName },
     });
-
+    console.log(findedCompany);
     if (!findedCompany) {
       return 'Empresa não encontrada!';
     }
@@ -57,20 +67,20 @@ export class CompanyService {
     }
 
     if (findedVehicle.vehicleType == 'Carro') {
-      if (findedCompany.numberOfCarParking > 0) {
-        findedCompany.numberOfCarParking--;
+      if (findedCompany.availableCarSlot > 0) {
+        findedCompany.availableCarSlot--;
         await this.companyRepository.save(findedCompany);
-        return `Veículo cadastrado, restam ${findedCompany.numberOfCarParking} vagas para carro!`;
+        return `Veículo cadastrado, restam ${findedCompany.availableCarSlot} vagas para carro!`;
       } else {
         return 'Sem vagas para carros disponivel';
       }
     }
 
     if (findedVehicle.vehicleType == 'Moto') {
-      if (findedCompany.numberOfMotorcycleParking > 0) {
-        findedCompany.numberOfMotorcycleParking--;
+      if (findedCompany.availableMotorcycleSlot > 0) {
+        findedCompany.availableMotorcycleSlot--;
         await this.companyRepository.save(findedCompany);
-        return `Veículo cadastrado, restam ${findedCompany.numberOfMotorcycleParking} vagas para moto!`;
+        return `Veículo cadastrado, restam ${findedCompany.availableMotorcycleSlot} vagas para moto!`;
       } else {
         return 'Sem vagas para motos disponivel';
       }
@@ -95,22 +105,25 @@ export class CompanyService {
     }
 
     if (findedVehicle.vehicleType == 'Carro') {
-      if (findedCompany.numberOfCarParking < 30) {
-        findedCompany.numberOfCarParking++;
+      if (findedCompany.availableCarSlot < findedCompany.numberOfCarParking) {
+        findedCompany.availableCarSlot++;
         await this.companyRepository.save(findedCompany);
-        return `Veículo cadastrado, restam ${findedCompany.numberOfCarParking} vagas para carro!`;
+        return `Veículo cadastrado, restam ${findedCompany.availableCarSlot} vagas para carro!`;
       } else {
-        return 'Sem vagas para carros disponivel';
+        return 'Todas vagas para carro estão vazias';
       }
     }
 
     if (findedVehicle.vehicleType == 'Moto') {
-      if (findedCompany.numberOfMotorcycleParking < 30) {
-        findedCompany.numberOfMotorcycleParking++;
+      if (
+        findedCompany.availableMotorcycleSlot <
+        findedCompany.numberOfMotorcycleParking
+      ) {
+        findedCompany.availableMotorcycleSlot++;
         await this.companyRepository.save(findedCompany);
-        return `Veículo cadastrado, restam ${findedCompany.numberOfMotorcycleParking} vagas para moto!`;
+        return `Veículo cadastrado, restam ${findedCompany.availableMotorcycleSlot} vagas para moto!`;
       } else {
-        return 'Sem vagas para motos disponivel';
+        return 'Todas vagas para moto estão vazias';
       }
     }
   }

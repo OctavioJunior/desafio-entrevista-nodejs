@@ -22,4 +22,10 @@ export class Company {
 
   @Column('int')
   numberOfMotorcycleParking: number;
+
+  @Column('int', { default: 0 })
+  availableCarSlot: number;
+
+  @Column('int', { default: 0 })
+  availableMotorcycleSlot: number;
 }

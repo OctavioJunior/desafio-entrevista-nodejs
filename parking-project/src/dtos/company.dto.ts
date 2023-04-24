@@ -5,6 +5,8 @@ export default interface CompanyRegisterDTO {
   companyPhone: number;
   numberOfCarParking: number;
   numberOfMotorcycleParking: number;
+  availabreCarSlot?: number;
+  availableMotorcycleSlot?: number;
 }
 
 export interface CompanyUpdateDTO {
@@ -12,12 +14,6 @@ export interface CompanyUpdateDTO {
   cnpj?: string;
   companyAddress?: string;
   companyPhone?: number;
-  numberOfCarParking?: number;
-  numberOfMotorcycleParking?: number;
-}
-
-export interface CompanyParkingDTO {
-  companyName: string;
   numberOfCarParking?: number;
   numberOfMotorcycleParking?: number;
 }
