@@ -25,37 +25,30 @@
 <p>Siga os passos abaixo para instalar e executar o projeto em seu ambiente local:</p>
 
 <ol>
-    <li>Clone este repositório em sua máquina:</li>
+<li>Clone este repositório em sua máquina:</li>
+    
+        git clone https://github.com/OctavioJunior/desafio-entrevista-nestjs.git
 
-    <code>git clone https://github.com/OctavioJunior/desafio-entrevista-nestjs.git</code>
+<li>Entre na pasta do projeto:</li>
 
-    <li>Entre na pasta do projeto:</li>
+        cd desafio-entrevista-nestjs/parking-project
 
-    <pre><code>cd desafio-entrevista-nestjs/parking-project</code></pre>
+<li>Instale as dependências do projeto:</li>
 
-    <li>Instale as dependências do projeto:</li>
+        npm install
 
-    <pre><code>npm install</code></pre>
+<li>Crie um arquivo `.env` na raiz do projeto, com as seguintes variáveis de ambiente:</li>
 
-    <li>Crie um arquivo `.env` na raiz do projeto, com as seguintes variáveis de ambiente:</li>
+        JWT_SECRET= <token_jwt>
 
-    <pre><code>PORT=3000
 
-DB_HOST= host_do_banco_de_dados_mysql
-DB_PORT= porta_do_banco_de_dados_mysql
-DB_USERNAME= usuário_do_banco_de_dados_mysql
-DB_PASSWORD= senha_do_banco_de_dados_mysql
-DB_DATABASE= nome_do_banco_de_dados_mysql
-JWT_SECRET= segredo_para_jwt
-</code></pre>
 
-    Substitua `<host_do_banco_de_dados_mysql>` pela URL do host do MySQL, `<porta_do_banco_de_dados_mysql>` pela porta do MySQL, `<usuário_do_banco_de_dados_mysql>` pelo usuário do MySQL, `<senha_do_banco_de_dados_mysql>` pela senha do MySQL e `<nome_do_banco_de_dados_mysql>` pelo nome do banco de dados do MySQL. Substitua `<segredo_para_jwt>` por uma string aleatória para ser usada como chave secreta na geração de tokens JWT.
+<p>    Substitua `<host_do_banco_de_dados_mysql>` pela URL do host do MySQL, `<porta_do_banco_de_dados_mysql>` pela porta do MySQL, `<usuário_do_banco_de_dados_mysql>` pelo usuário do MySQL, `<senha_do_banco_de_dados_mysql>` pela senha do MySQL e `<nome_do_banco_de_dados_mysql>` pelo nome do banco de dados do MySQL. Substitua `<segredo_para_jwt>` por uma string aleatória para ser usada como chave secreta na geração de tokens JWT.</p>
 
-    <li>Inicie o servidor:</li>
+<li>Inicie o servidor:</li>
 
-    <pre><code>npm start</code></pre>
-
-    </ol>
+        npm run start:dev
+</ol>
 
 <h2>Utilização</h2>
 
