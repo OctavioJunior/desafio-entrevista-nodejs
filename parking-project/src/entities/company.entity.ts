@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Company {
@@ -8,7 +8,7 @@ export class Company {
   @Column({ length: 255 })
   companyName: string;
 
-  @Column({ length: 20 })
+  @Column({ length: 20, unique: true })
   cnpj: string;
 
   @Column({ length: 255 })

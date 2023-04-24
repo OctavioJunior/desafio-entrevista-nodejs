@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { UserRegisterDTO } from 'src/dtos/user.dto';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
@@ -15,10 +15,18 @@ export class UserService {
   }
 
   async findOneUser(email: string): Promise<any> {
-    return this.userRepository.findOne({ where: { email } });
+    const userFinded = await this.userRepository.findOne({ where: { email } });
+
+    if (!userFinded) {
+      throw new NotFoundException(`Email: ${email} não encontrado!`);
+    }
   }
 
   async registerUser(data: UserRegisterDTO): Promise<any> {
+    const userExist = await this.findOneUser(data.email).catch(() => undefined);
+    if (userExist) {
+      return 'Email já cadastrado!';
+    }
     const newUser = this.userRepository.create(data);
     await this.userRepository.save(newUser);
     return { status: true, mensagem: 'Usuário cadastrado!' };

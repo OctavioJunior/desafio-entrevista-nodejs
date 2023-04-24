@@ -1,12 +1,9 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import CompanyRegisterDTO, { CompanyUpdateDTO } from 'src/dtos/company.dto';
+import { Vehicle } from 'src/entities/vehicle.entity';
 import { Repository } from 'typeorm';
 import { Company } from '../entities/company.entity';
-import CompanyRegisterDTO, {
-  CompanyUpdateDTO,
-  CompanyParkingDTO,
-} from 'src/dtos/company.dto';
 import { VehicleService } from './vehicle.service';
-import { Vehicle } from 'src/entities/vehicle.entity';
 
 @Injectable()
 export class CompanyService {

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Vehicle {
@@ -17,6 +17,6 @@ export class Vehicle {
   @Column({ length: 50 })
   vehicleType: string;
 
-  @Column({ length: 15 })
+  @Column({ length: 15, unique: true })
   vehiclePlate: string;
 }
