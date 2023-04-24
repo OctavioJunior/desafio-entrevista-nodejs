@@ -43,6 +43,11 @@ export class CompanyService {
     const findedCompany = await this.companyRepository.findOne({
       where: { companyName },
     });
+
+    if (!findedCompany) {
+      return 'Empresa não encontrada!';
+    }
+
     const findedVehicle = await this.vehicleRepository.findOne({
       where: { vehiclePlate },
     });
@@ -52,18 +57,19 @@ export class CompanyService {
     }
 
     if (findedVehicle.vehicleType == 'Carro') {
-      if (findedCompany.numberOfCarParking >= 0) {
+      if (findedCompany.numberOfCarParking > 0) {
         findedCompany.numberOfCarParking--;
-        this.companyRepository.save(findedCompany);
+        await this.companyRepository.save(findedCompany);
         return `Veículo cadastrado, restam ${findedCompany.numberOfCarParking} vagas para carro!`;
       } else {
         return 'Sem vagas para carros disponivel';
       }
-    } else {
-      if (findedCompany.numberOfMotorcycleParking >= 0) {
-        console.log(findedCompany);
+    }
+
+    if (findedVehicle.vehicleType == 'Moto') {
+      if (findedCompany.numberOfMotorcycleParking > 0) {
         findedCompany.numberOfMotorcycleParking--;
-        this.companyRepository.save(findedCompany);
+        await this.companyRepository.save(findedCompany);
         return `Veículo cadastrado, restam ${findedCompany.numberOfMotorcycleParking} vagas para moto!`;
       } else {
         return 'Sem vagas para motos disponivel';
@@ -75,32 +81,36 @@ export class CompanyService {
     const findedCompany = await this.companyRepository.findOne({
       where: { companyName },
     });
+
+    if (!findedCompany) {
+      return 'Empresa não encontrada!';
+    }
+
     const findedVehicle = await this.vehicleRepository.findOne({
       where: { vehiclePlate },
     });
-    console.log(findedVehicle);
-    console.log(findedCompany);
 
     if (!findedVehicle) {
-      return 'Veículo não encontrado!';
+      return 'Veículo não cadastrado, realize o cadastro!';
     }
 
     if (findedVehicle.vehicleType == 'Carro') {
-      if (findedCompany.numberOfCarParking <= 30) {
+      if (findedCompany.numberOfCarParking < 30) {
         findedCompany.numberOfCarParking++;
-        this.companyRepository.save(findedCompany);
+        await this.companyRepository.save(findedCompany);
         return `Veículo cadastrado, restam ${findedCompany.numberOfCarParking} vagas para carro!`;
       } else {
-        return 'Todas vagas para carros disponiveis';
+        return 'Sem vagas para carros disponivel';
       }
-    } else {
-      if (findedCompany.numberOfMotorcycleParking <= 30) {
-        console.log(findedCompany);
+    }
+
+    if (findedVehicle.vehicleType == 'Moto') {
+      if (findedCompany.numberOfMotorcycleParking < 30) {
         findedCompany.numberOfMotorcycleParking++;
-        this.companyRepository.save(findedCompany);
+        await this.companyRepository.save(findedCompany);
         return `Veículo cadastrado, restam ${findedCompany.numberOfMotorcycleParking} vagas para moto!`;
       } else {
-        return 'Todas vagas para motos disponiveis';
+        return 'Sem vagas para motos disponivel';
       }
     }
   }
